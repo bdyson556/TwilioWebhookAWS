@@ -1,0 +1,11 @@
+1) Make sure you have your TWILIO_AUTH_TOKEN. Should be in 1Password, you should only need the value (not the key).
+2) Make sure to set the environmental variable. Just do it on the command line. Try this process with GitBash or Ubuntu
+terminal first.
+- Linux-based terminal: export TWILIO_AUTH_TOKEN=valuevaluevalue
+- Windows-based terminal: set TWILIO_AUTH_TOKEN=valuevaluevalue
+3) Deploy the function:
+- Linux: sls deploy
+- Windows: serverless deploy (IMPORTANT: do NOT use "sls deploy" on a Windows-based terminal as there is a naming conflict.
+
+Troubleshooting and Monitoring: AWS Lambda; find your func, monitor, check logs, etc. Any print statements or stacktraces
+that you specify to print should show up there, in the Cloudwatch logs. Find the invocation and click on the log link.
