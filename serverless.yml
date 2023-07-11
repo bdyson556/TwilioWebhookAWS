@@ -1,0 +1,29 @@
+service: lambda-webhook
+#configValidationMode: error
+
+# Establishes AWS Lambda as the deployment platform, sets the Python runtime, exports the auth token so that
+# it's deployed along with the function.
+provider:
+  name: aws
+  runtime: python3.10
+  environment:
+    TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
+    # To avoid hard coding it, I had to set the var and execute from cmd for this to work...
+
+# These are Node.js plugins.
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+
+# The actual service that will be deployed, which is comprised of a single function, webhook.
+functions:
+  webhook:
+    handler: wsgi_handler.handler
+    url: true
+
+# Specific parameters to pass to the plugins, here wsgi and pythonRequirements.
+custom:
+  wsgi:
+    app: webhook.app
+  pythonRequirements:
+    pythonBin: python
